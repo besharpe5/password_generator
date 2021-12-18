@@ -1,13 +1,17 @@
 // Assignment code here
+const UPPERCASECHAR = ["A", "B", "C", "D"];
+const LOWERCASECHAR = ["a", "b", "c", "d"];
+const NUMERIC = ["1", "2", "3", "4"];
+const SPECIALCHAR = ["!", "$", "%", "&"];
 
-function generatePassword () {
-   // console.log("this message works");
-    //return "this message works";
+function passwordRequirements () {
     //password length 
     var passwordLength = parseInt(window.prompt("Select required character length"));
-    if (Number.isNaN(passwordLength));
+    if (Number.isNaN(passwordLength)) {
     alert("A value needs to be entered.");
     return null;
+    }
+    
     if (passwordLength < 8) {
         alert("Password needs to be at least 8 characters in length.");
         return null;
@@ -33,8 +37,24 @@ function generatePassword () {
     if (isUppercaseChar === false && isLowercaseChar === false && isNumericChar === false && isSpecialChar === false) {
         alert("At least one option needs to be selected.");
     }
+    const passwordOptions = {
+        length: passwordLength,
+        isUppercase: isUppercaseChar,
+        isLowercase: isLowercaseChar,
+        isNumeric: isNumericChar,
+        isSymbol: isSpecialChar,
+      };
+      return passwordOptions;
+}
 
-
+function generatePassword () {
+   var passwordOptions = passwordRequirements();
+   let allCharacters = [];
+   if (passwordOptions.isUppercase) {
+    allCharacters = allCharacters.concat(UPPERCASECHAR);
+    console.log("allCharacters", allCharacters);
+   }
+   console.log("What is my password option?" , passwordOptions);
 }
 
 
