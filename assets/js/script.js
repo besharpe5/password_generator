@@ -1,8 +1,84 @@
 // Assignment code here
-const UPPERCASECHAR = ["A", "B", "C", "D"];
-const LOWERCASECHAR = ["a", "b", "c", "d"];
-const NUMERIC = ["1", "2", "3", "4"];
-const SPECIALCHAR = ["!", "$", "%", "&"];
+const UPPERCASECHAR = [
+'A',
+'B',
+'C',
+'D',
+'E',
+'F',
+'G',
+'H',
+'I',
+'J',
+'K',
+'L',
+'M',
+'N',
+'O',
+'P',
+'Q',
+'R',
+'S',
+'T',
+'U',
+'V',
+'W',
+'X',
+'Y',
+'Z'
+];
+const LOWERCASECHAR = [
+'a',
+'b',
+'c',
+'d',
+'e',
+'f',
+'g',
+'h',
+'i',
+'j',
+'k',
+'l',
+'m',
+'n',
+'o',
+'p',
+'q',
+'r',
+'s',
+'t',
+'u',
+'v',
+'w',
+'x',
+'y',
+'z'];
+const NUMERIC = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const SPECIALCHAR = [
+'@',
+'%',
+'+',
+'\\',
+'/',
+"'",
+'!',
+'#',
+'$',
+'^',
+'?',
+':',
+',',
+')',
+'(',
+'}',
+'{',
+']',
+'[',
+'~',
+'-',
+'_',
+'.'];
 
 function passwordRequirements () {
     //password length 
@@ -38,7 +114,7 @@ function passwordRequirements () {
         alert("At least one option needs to be selected.");
     }
     const passwordOptions = {
-        length: passwordLength,
+        passwordLength: passwordLength,
         isUppercase: isUppercaseChar,
         isLowercase: isLowercaseChar,
         isNumeric: isNumericChar,
@@ -50,12 +126,46 @@ function passwordRequirements () {
 function generatePassword () {
    var passwordOptions = passwordRequirements();
    let allCharacters = [];
+   let passwordResults = [];
+
    if (passwordOptions.isUppercase) {
     allCharacters = allCharacters.concat(UPPERCASECHAR);
-    console.log("allCharacters", allCharacters);
+    console.log("uppercase", allCharacters);
    }
-   console.log("What is my password option?" , passwordOptions);
+
+   if (passwordOptions.isLowercase) {
+    allCharacters = allCharacters.concat(LOWERCASECHAR);
+    console.log("uppercase + lowercase", allCharacters);
+   }
+   //numeric
+   if (passwordOptions.isNumeric) {
+       allCharacters = allCharacters.concat(NUMERIC);
+       console.log("uppercase + lowercase + numeric");
+   }
+   //symbol
+   if (passwordOptions.isSymbol) {
+       allCharacters = allCharacters.concat(SPECIALCHAR);
+       console.log("uppercase + lowercase + numeric + symbol");
+   }
+
+   //console.log("What is my password option?" , passwordOptions);
+    for (var i =0; i < passwordOptions.passwordLength; i++) {
+    var getCharacters = getRandom(allCharacters);
+   
+    //console.log("What is the index?" , index);
+    passwordResults.push(getCharacters);
 }
+return passwordResults.join("");
+ 
+  
+}
+
+function getRandom (array) {
+    console.log("array length" , array.length);
+    var index = Math.floor(Math.random() * array.length);
+    return array[index];
+}
+
 
 
 // Get references to the #generate element
