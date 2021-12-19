@@ -112,6 +112,7 @@ function passwordRequirements () {
 
     if (isUppercaseChar === false && isLowercaseChar === false && isNumericChar === false && isSpecialChar === false) {
         alert("At least one option needs to be selected.");
+        return null;
     }
     const passwordOptions = {
         passwordLength: passwordLength,
@@ -126,36 +127,52 @@ function passwordRequirements () {
 function generatePassword () {
    var passwordOptions = passwordRequirements();
    let allCharacters = [];
+
+   let mustHaveCharacters = [];
    let passwordResults = [];
 
    if (passwordOptions.isUppercase) {
     allCharacters = allCharacters.concat(UPPERCASECHAR);
-    console.log("uppercase", allCharacters);
+   mustHaveCharacters.push(getRandom(UPPERCASECHAR));
+    console.log("Must have uppercase characters" , mustHaveCharacters);
+    //console.log("uppercase", allCharacters);
    }
 
    if (passwordOptions.isLowercase) {
     allCharacters = allCharacters.concat(LOWERCASECHAR);
-    console.log("uppercase + lowercase", allCharacters);
+    mustHaveCharacters.push(getRandom(LOWERCASECHAR));
+    console.log("Must have lowercase characters" , mustHaveCharacters);
+    //console.log("uppercase + lowercase", allCharacters);
    }
    //numeric
    if (passwordOptions.isNumeric) {
        allCharacters = allCharacters.concat(NUMERIC);
-       console.log("uppercase + lowercase + numeric");
+       mustHaveCharacters.push(getRandom(NUMERIC));
+       console.log("Must have numeric characters" , mustHaveCharacters);
+       //console.log("uppercase + lowercase + numeric" , allCharacters);
    }
    //symbol
    if (passwordOptions.isSymbol) {
        allCharacters = allCharacters.concat(SPECIALCHAR);
-       console.log("uppercase + lowercase + numeric + symbol");
+       mustHaveCharacters.push(getRandom(SPECIALCHAR));
+       console.log("Must have special characters" , mustHaveCharacters);
+       //console.log("uppercase + lowercase + numeric + symbol", allCharacters);
    }
 
    //console.log("What is my password option?" , passwordOptions);
     for (var i =0; i < passwordOptions.passwordLength; i++) {
-    var getCharacters = getRandom(allCharacters);
-   
-    //console.log("What is the index?" , index);
-    passwordResults.push(getCharacters);
-}
-return passwordResults.join("");
+        var getCharacters = getRandom(allCharacters);
+    
+        //console.log("What is the index?" , index);
+        passwordResults.push(getCharacters);
+      
+    }
+    console.log("Original password." , passwordResults.join(""));
+    for (var i = 0; i < mustHaveCharacters.length; i++ ) {
+        passwordResults[i] = mustHaveCharacters[i];
+    }
+    console.log("New password." , passwordResults.join(""));
+    return passwordResults.join("");
  
   
 }
