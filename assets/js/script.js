@@ -82,7 +82,7 @@ const SPECIALCHAR = [
 
 function passwordRequirements () {
     //password length 
-    var passwordLength = parseInt(window.prompt("Select required character length"));
+    var passwordLength = parseInt(window.prompt("Enter a character length between 8 and 128."));
     if (Number.isNaN(passwordLength)) {
     alert("A value needs to be entered.");
     return null;
@@ -96,19 +96,18 @@ function passwordRequirements () {
         alert("Password needs to be less than 128 characters in length.");
         return null;
     }
-    console.log(passwordLength);
     //uppercase 
     var isUppercaseChar = confirm("Do you want to include uppercase characters?");
-    console.log(isUppercaseChar);
+
     //lowercase
     var isLowercaseChar = confirm("Do you want to include lowercase characters?");
-    console.log(isLowercaseChar);
+
     //numeric
     var isNumericChar = confirm("Do you want to include numbers?");
-    console.log(isNumericChar);
+    
     //symbols
     var isSpecialChar = confirm("Do you want to include special characters/symbols?");
-    console.log(isSpecialChar);
+    
 
     if (isUppercaseChar === false && isLowercaseChar === false && isNumericChar === false && isSpecialChar === false) {
         alert("At least one option needs to be selected.");
@@ -134,56 +133,42 @@ function generatePassword () {
    if (passwordOptions.isUppercase) {
     allCharacters = allCharacters.concat(UPPERCASECHAR);
    mustHaveCharacters.push(getRandom(UPPERCASECHAR));
-    console.log("Must have uppercase characters" , mustHaveCharacters);
-    //console.log("uppercase", allCharacters);
    }
 
    if (passwordOptions.isLowercase) {
     allCharacters = allCharacters.concat(LOWERCASECHAR);
     mustHaveCharacters.push(getRandom(LOWERCASECHAR));
-    console.log("Must have lowercase characters" , mustHaveCharacters);
-    //console.log("uppercase + lowercase", allCharacters);
    }
    //numeric
    if (passwordOptions.isNumeric) {
        allCharacters = allCharacters.concat(NUMERIC);
        mustHaveCharacters.push(getRandom(NUMERIC));
-       console.log("Must have numeric characters" , mustHaveCharacters);
-       //console.log("uppercase + lowercase + numeric" , allCharacters);
    }
    //symbol
    if (passwordOptions.isSymbol) {
        allCharacters = allCharacters.concat(SPECIALCHAR);
        mustHaveCharacters.push(getRandom(SPECIALCHAR));
-       console.log("Must have special characters" , mustHaveCharacters);
-       //console.log("uppercase + lowercase + numeric + symbol", allCharacters);
    }
 
-   //console.log("What is my password option?" , passwordOptions);
     for (var i =0; i < passwordOptions.passwordLength; i++) {
         var getCharacters = getRandom(allCharacters);
     
-        //console.log("What is the index?" , index);
         passwordResults.push(getCharacters);
       
     }
-    console.log("Original password." , passwordResults.join(""));
+
     for (var i = 0; i < mustHaveCharacters.length; i++ ) {
         passwordResults[i] = mustHaveCharacters[i];
     }
-    console.log("New password." , passwordResults.join(""));
+
     return passwordResults.join("");
  
-  
 }
 
 function getRandom (array) {
-    console.log("array length" , array.length);
     var index = Math.floor(Math.random() * array.length);
     return array[index];
 }
-
-
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
